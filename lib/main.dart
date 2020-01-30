@@ -6,7 +6,6 @@ import 'package:base_androidx_app/util/connection.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_redux/flutter_redux.dart';
 import 'package:redux/redux.dart';
-import 'dart:developer' as developer;
 
 Store<AppState> createStore = Store<AppState>(
   appReducer,
@@ -34,9 +33,6 @@ class BaseApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    //JsonEncoder encoder = new JsonEncoder.withIndent('  ');
-    //String prettyprint = encoder.convert(store.state);
-    developer.log(store.state.toString(), name: 'state');
     // The StoreProvider should wrap your MaterialApp or WidgetsApp. This will
     // ensure all routes have access to the store.
     return StoreProvider<AppState>(
@@ -78,10 +74,7 @@ class _ConnectionWidgetState extends State<ConnectionWidget> {
   Widget build(BuildContext context) {
     return StoreConnector<AppState, bool>(
       converter: (store) => store.state.isOffline,
-      onInit: (store) {
-        developer.log('onInit', name: 'store');
-        store.dispatch(InitConnectionAction());
-      },
+      onInit: (store) => store.dispatch(InitConnectionAction()),
       builder: (context, isOffline) {
         return (isOffline)? new Text("Not connected") : new Text("Connected");
       }
