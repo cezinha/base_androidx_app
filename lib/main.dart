@@ -6,19 +6,36 @@ import 'package:base_androidx_app/util/connection.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_redux/flutter_redux.dart';
 import 'package:redux/redux.dart';
+import 'package:redux_dev_tools/redux_dev_tools.dart';
+import 'package:redux_remote_devtools/redux_remote_devtools.dart';
 
-Store<AppState> createStore = Store<AppState>(
+/*Store<AppState> createStore = Store<AppState>(
   appReducer,
   initialState: new AppState(),
   middleware: createStoreMiddleware()
-);
+);*/
 
-void main() {
+Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   // Create your store as a final variable in the main function or inside a
   // State object. This works better with Hot Reload than creating it directly
   // in the `build` function.
-  final store = createStore;
+  //final store = createStore;
+  var remoteDevtools = RemoteDevToolsMiddleware('192.168.1.30:8000');
+
+  List<Middleware<AppState>> createStoreMiddleware() => [
+    remoteDevtools,
+    TypedMiddleware<AppState, InitConnectionAction>(initConnectionStatus)
+  ];
+
+  final store = new DevToolsStore<AppState>(
+    appReducer,
+    initialState: new AppState(),
+    middleware: createStoreMiddleware()
+  );
+
+  remoteDevtools.store = store;
+  await remoteDevtools.connect();
 
   ConnectionStatusSingleton connectionStatus = ConnectionStatusSingleton.getInstance();
   connectionStatus.initialize();

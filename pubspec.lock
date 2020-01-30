@@ -165,11 +165,25 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "0.5.2"
+  redux_remote_devtools:
+    dependency: "direct main"
+    description:
+      name: redux_remote_devtools
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "1.0.2"
   sky_engine:
     dependency: transitive
     description: flutter
     source: sdk
     version: "0.0.99"
+  socketcluster_client:
+    dependency: transitive
+    description:
+      name: socketcluster_client
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "0.2.0"
   source_span:
     dependency: transitive
     description:
