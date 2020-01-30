@@ -7,7 +7,7 @@ class AppState extends Equatable {
     this.isOffline = false,
   });
 
-  AppState.fromJson(Map<String, dynamic> json): isOffline = json['isOffline']
+  AppState.fromJson(Map<String, dynamic> json): isOffline = json['isOffline'];
 
   Map<String, dynamic> toJson() => {'isOffline': isOffline};
 

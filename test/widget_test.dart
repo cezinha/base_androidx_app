@@ -12,7 +12,7 @@ import 'package:base_androidx_app/main.dart';
 void main() {
   testWidgets('Counter increments smoke test', (WidgetTester tester) async {
     // Build our app and trigger a frame.
-    await tester.pumpWidget(BaseApp(store: createStore));
+    await tester.pumpWidget(BaseApp());
 
     // Verify that our counter starts at 0.
     expect(find.text('Connected'), findsOneWidget);
